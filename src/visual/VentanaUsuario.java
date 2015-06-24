@@ -19,7 +19,7 @@ import trataJSON.UsuarioJSON;
 
 
 import auxiliar.Auxiliar;
-import beans.Usuario;
+import beans.Proyecto;
 
 public class VentanaUsuario extends JDialog {
  
@@ -81,21 +81,21 @@ public class VentanaUsuario extends JDialog {
 						//			"Valores permitidos [a-z], [A-Z], [0-9] y espacio");
 						//							
 						//} else {
-                    	Usuario u = new Usuario((int) Math.floor(Math.random()*(1000-1+1)+1000), nomUsuario.getText(), ap1Usuario.getText(), ap2Usuario.getText(), null);
+                    	Proyecto u = new Proyecto((int) Math.floor(Math.random()*(1000-1+1)+1000), nomUsuario.getText(), ap1Usuario.getText(), ap2Usuario.getText(), null);
                     	Auxiliar.lUsuarios.add(u);
-                    	Collections.sort(Auxiliar.lUsuarios, new Comparator<Usuario>(){
-                			public int compare(Usuario u1, Usuario u2) {
+                    	Collections.sort(Auxiliar.lUsuarios, new Comparator<Proyecto>(){
+                			public int compare(Proyecto u1, Proyecto u2) {
                 				// TODO Auto-generated method stub
                 				
                 				return u1.getNombre().compareTo(u2.getNombre());
                 			}
                         });
-                        ListIterator<Usuario> iter = Auxiliar.lUsuarios.listIterator();
+                        ListIterator<Proyecto> iter = Auxiliar.lUsuarios.listIterator();
                         Auxiliar.modelo.clear();
                         while (iter.hasNext())
                         {        	
                         	
-                        	Usuario usuario = (Usuario) iter.next();
+                        	Proyecto usuario = (Proyecto) iter.next();
                         	Auxiliar.modelo.addElement(usuario.getNombre());
                         }
                                 	

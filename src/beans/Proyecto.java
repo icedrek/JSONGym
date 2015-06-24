@@ -2,16 +2,16 @@ package beans;
 
 import java.util.ArrayList;
 
-public class Usuario implements java.io.Serializable {
+public class Proyecto implements java.io.Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private int idUsuario;
 	private String nombre, ape1, ape2;
 	private ArrayList<Integer> rutinas;
 	
-	public Usuario(){}	
+	public Proyecto(){}	
 	
-	public Usuario(int idUsuario, String nombre, String ape1, String ape2, ArrayList<Integer> rutinas)
+	public Proyecto(int idUsuario, String nombre, String ape1, String ape2, ArrayList<Integer> rutinas)
 	{
 		this.idUsuario = idUsuario;
 		this.nombre = nombre;

@@ -17,10 +17,10 @@ import tratafichero.EscribeFichero;
 import tratafichero.LeeFichero;
 
 import auxiliar.Auxiliar;
-import beans.Usuario;
+import beans.Proyecto;
 
 public class UsuarioJSON {
-	private Usuario usuario;
+	private Proyecto usuario;
 	private static String fichero;
 	
 	
@@ -34,7 +34,7 @@ public class UsuarioJSON {
 		}
 	}
 	
-	public UsuarioJSON(Usuario usuario)
+	public UsuarioJSON(Proyecto usuario)
 	{
 		this.usuario = usuario;	
 		
@@ -73,12 +73,12 @@ public class UsuarioJSON {
 	
 	//Metodo para generar lista de usuarios a partir de fichero en formato JSON
 	@SuppressWarnings({ "unchecked" })
-	public ArrayList<Usuario> consultaUsuariosJSON ()
+	public ArrayList<Proyecto> consultaUsuariosJSON ()
 	{			
-		ArrayList<Usuario> listUser = new ArrayList<Usuario>();
+		ArrayList<Proyecto> listUser = new ArrayList<Proyecto>();
 		LeeFichero lf = new LeeFichero(fichero);
 		int totLineas = lf.numeroLineas();
-		Usuario u = null;
+		Proyecto u = null;
 		
 		
 		//Se recorre el fichero para montar un listado de usuarios en formato Usuario
@@ -87,7 +87,7 @@ public class UsuarioJSON {
 
 			for (int i = 1; i <= totLineas; i++)
 			{
-				u = new Usuario();
+				u = new Proyecto();
 				
 				JSONObject jsonObj = (JSONObject) jsonParser.parse(lf.leerLinea(i));
 				

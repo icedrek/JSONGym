@@ -12,12 +12,13 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 
 import auxiliar.Auxiliar;
-import beans.Usuario;
+import beans.Proyecto;
 
 import trataJSON.UsuarioJSON;
 
@@ -31,10 +32,11 @@ public class VentanaPrincipal extends JFrame implements ActionListener
 	public  JButton btnNuevoEjercicio, btnNuevoUsuario, btnBuscaUsuario, btnNuevaRutina;
 	public  JButton btnBorraTablas;
 	private JTextField txtUsuario;
+	private JTable tbUsuarios = new JTable(Auxiliar.modelo);
 	private UsuarioJSON uJSON = new UsuarioJSON();
 
 	//private DefaultListModel<String> modelo = new DefaultListModel<String>();
-	private JList<String> txtAreaUsuario = new JList<String>(Auxiliar.modelo);
+	//private JList<String> txtAreaUsuario = new JList<String>(Auxiliar.modelo);
 		
 	public VentanaPrincipal() 
 	{ 		
@@ -73,11 +75,11 @@ public class VentanaPrincipal extends JFrame implements ActionListener
         btnBuscaUsuario.addActionListener( new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
-            {ListIterator<Usuario> iter = Auxiliar.lUsuarios.listIterator();
+            {ListIterator<Proyecto> iter = Auxiliar.lUsuarios.listIterator();
             
             while (iter.hasNext())
             {        	        	
-            	Usuario usuario = (Usuario) iter.next();
+            	Proyecto usuario = (Proyecto) iter.next();
             	String s = usuario.getNombre();
             	if(s.equals(txtUsuario.getText())){
             		
@@ -123,29 +125,38 @@ public class VentanaPrincipal extends JFrame implements ActionListener
         
         Auxiliar.lUsuarios = uJSON.consultaUsuariosJSON();                       
         
-        Collections.sort(Auxiliar.lUsuarios, new Comparator<Usuario>(){
-			public int compare(Usuario u1, Usuario u2) {
+        Collections.sort(Auxiliar.lUsuarios, new Comparator<Proyecto>(){
+			public int compare(Proyecto u1, Proyecto u2) {
 				// TODO Auto-generated method stub
 				
 				return u1.getNombre().compareTo(u2.getNombre());
 			}
         });
-        ListIterator<Usuario> iter = Auxiliar.lUsuarios.listIterator();
+        ListIterator<Proyecto> iter = Auxiliar.lUsuarios.listIterator();
         
         while (iter.hasNext())
         {        	        	
-        	Usuario usuario = (Usuario) iter.next();
-        	Auxiliar.modelo.addElement(usuario.getNombre() + " " + usuario.getApe1() + " " + usuario.getApe2());
+        	Proyecto usuario = (Proyecto) iter.next();
+        	//Auxiliar.modelo.addElement(usuario.getNombre() + " " + usuario.getApe1() + " " + usuario.getApe2());
+        	Auxiliar.modelo.setValueAt(usuario.getNombre() + " " + usuario.getApe1() + " " + usuario.getApe2(), iter.nextIndex(), 1);
         }
                    
-        Auxiliar.modelo.addElement("+...");
+        //Auxiliar.modelo.addElement("+...");
+        
+        
                 	
         //txtAreaUsuario.setModel(modelo);        
+        /*
         JScrollPane scroll = new JScrollPane(txtAreaUsuario, 
         		    JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
         		    JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scroll.setBounds(200, 35, 575, 500);
         contentPane.add(scroll, BorderLayout.CENTER);
+        */
+        
+        tbUsuarios = new JTable(Auxiliar.modelo);
+    	JScrollPane scrollpane = new JScrollPane(tbUsuarios);
+    	contentPane.add(scrollpane);
 	}
 
 
